@@ -1,0 +1,2 @@
+email/password/name/customer
+test/pass/name/staff
