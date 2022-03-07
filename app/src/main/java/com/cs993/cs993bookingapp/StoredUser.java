@@ -1,19 +1,21 @@
 package com.cs993.cs993bookingapp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class StoredUser {
 
-    private String email, password, name, accessLevel;
+    private String email, password, uName, accessLevel;
 
-    public StoredUser(String email, String password, String name, String accessLevel) {
+    public StoredUser(String email, String password, String uName, String accessLevel) {
 
         this.email = email;
         this.password = password;
-        this.name = name;
+        this.uName = uName;
         this.accessLevel = accessLevel;
     }
 
     // Getters and Setters
-
 
     public String getEmail() {
         return email;
@@ -31,12 +33,12 @@ public class StoredUser {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUName() {
+        return uName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUName(String name) {
+        this.uName = name;
     }
 
     public String getAccessLevel() {

@@ -6,7 +6,8 @@
         <entry key="..\:/Documents/Android Studio Projects/CS993BookingApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2985" />
         <entry key="..\:/Documents/Android Studio Projects/CS993BookingApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2985" />
         <entry key="..\:/Documents/Android Studio Projects/CS993BookingApp/app/src/main/res/drawable/login_textbox.xml" value="0.2985" />
-        <entry key="..\:/Documents/Android Studio Projects/CS993BookingApp/app/src/main/res/layout/activity_main.xml" value="0.3578125" />
+        <entry key="..\:/Documents/Android Studio Projects/CS993BookingApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Documents/Android Studio Projects/CS993BookingApp/app/src/main/res/layout/activity_register_user.xml" value="0.358695652173913" />
       </map>
     </option>
   </component>

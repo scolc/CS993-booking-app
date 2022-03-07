@@ -2,11 +2,15 @@ package com.cs993.cs993bookingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -24,38 +28,81 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickRegisterAccount(View view) {
 
+        Intent intent = new Intent(this, RegisterUser.class);
+        startActivity(intent);
+
     }
 
     /**
      * The activity when the user clicks on the log in button
-     * @param view
+     * @param view The view
      */
     public void onClickLogIn(View view) {
 
-        UserList storedUsers = new UserList();
-        InputStream userTextFile = null;
-        try {
-            userTextFile = getAssets().open("users.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        storedUsers.initialiseStoredUsersList(userTextFile);
+        UserList storedUsers = getStoredUsers();
 
-        EditText loginEmailView = (EditText) findViewById(R.id.LogInEmailAddress);
+        EditText loginEmailView = findViewById(R.id.LogInEmailAddress);
         String  loginEmailText = loginEmailView.getText().toString();
 
         EditText loginPasswordView = findViewById(R.id.LogInPassword);
         String loginPasswordText = loginPasswordView.getText().toString();
 
-        String[] result = {"false", ""};
-
+        String[] result;
         result = storedUsers.checkLoginDetails(loginEmailText, loginPasswordText);
 
         TextView resultOutput = findViewById(R.id.loginResult);
-        resultOutput.setText(result[0]);
 
+        User sessionUser;
 
+        if (result[0].equals("true")){
+            StoredUser currentStoredUser = storedUsers.getStoredUserAt(Integer.valueOf(result[1]));
+            if (currentStoredUser.getAccessLevel().equals("customer")) {
+                sessionUser = new Customer(currentStoredUser.getEmail(), currentStoredUser.getUName(), currentStoredUser.getPassword());
+            } else if (currentStoredUser.getAccessLevel().equals("staff")) {
+                sessionUser = new Staff(currentStoredUser.getEmail(), currentStoredUser.getUName(), currentStoredUser.getPassword());
+            }
+            Toast.makeText(this, R.string.LoginSuccess, Toast.LENGTH_LONG).show();
+        } else {
+            resultOutput.setText(getResources().getString(R.string.LoginFailed));
+        }
+    }
 
+    public UserList getStoredUsers() {
 
+        File file = null;
+        FileInputStream fis = null;
+        InputStream is = null;
+        UserList storedUsers = new UserList();
+
+        try {
+            fis = openFileInput("users.txt");
+            storedUsers.openStoredUsersList(fis);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            try {
+                is = getAssets().open("users.txt");
+                storedUsers.openStoredUsersList(is);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } finally {
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            }
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return storedUsers;
     }
 }
