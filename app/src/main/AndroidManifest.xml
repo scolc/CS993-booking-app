@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS993BookingApp">
         <activity
+            android:name=".StaffHome"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerHome"
+            android:exported="false" />
+        <activity
             android:name=".RegisterUser"
             android:exported="false" />
         <activity

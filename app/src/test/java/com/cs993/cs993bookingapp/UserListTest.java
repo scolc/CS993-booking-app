@@ -10,25 +10,22 @@ public class UserListTest extends TestCase {
     public void testCheckLoginDetails() {
 
         // Setup user list
-        UserList testUserList = new UserList();
-        StoredUser testUser1 = new StoredUser("email", "pass", "name", "customer");
-        testUserList.updateList(testUser1);
-        StoredUser testUser2 = new StoredUser("address", "password", "name", "customer");
-        testUserList.updateList(testUser2);
+        StoredUserList testStoredUserList = new StoredUserList();
+        User testUser1 = new User("email", "pass", "name", "customer");
+        testStoredUserList.updateList(testUser1);
+        User testUser2 = new User("address", "password", "name", "customer");
+        testStoredUserList.updateList(testUser2);
 
 
+        // Test correct login details
+        assertEquals(testUser1, testStoredUserList.checkLoginDetails("email", "pass"));
+        assertEquals(testUser2, testStoredUserList.checkLoginDetails("address", "password"));
 
-        assertEquals("true", testUserList.checkLoginDetails("email", "pass")[0]);
-        assertEquals("0", testUserList.checkLoginDetails("email", "pass")[1]);
+        // Test incorrect login details
+        assertNull(testStoredUserList.checkLoginDetails("email", "password"));
+        assertNull(testStoredUserList.checkLoginDetails("address", "pass"));
 
-        assertEquals("false", testUserList.checkLoginDetails("email", "password")[0]);
-        assertEquals("", testUserList.checkLoginDetails("email", "password")[1]);
 
-        assertEquals("false", testUserList.checkLoginDetails("address", "pass")[0]);
-        assertEquals("", testUserList.checkLoginDetails("address", "pass")[1]);
-
-        assertEquals("true", testUserList.checkLoginDetails("address", "password")[0]);
-        assertEquals("1", testUserList.checkLoginDetails("address", "password")[1]);
 
     }
 }

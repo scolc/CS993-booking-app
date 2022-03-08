@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,6 +21,10 @@ public class RegisterUser extends AppCompatActivity {
         setContentView(R.layout.activity_register_user);
     }
 
+    /**
+     * The activity when the user clicks on the sign up button
+     * @param view The view
+     */
     public void onClickSignUp(View view) {
 
         EditText regNameView = findViewById(R.id.RegisterName);
@@ -38,20 +40,17 @@ public class RegisterUser extends AppCompatActivity {
         String regPasswordConfirmText = regPasswordConfirmView.getText().toString();
 
         TextView resultOutput = findViewById(R.id.RegisterResult);
-        String result;
-        UserList storedUsers = getStoredUsers();
+        StoredUserList storedUsers = getStoredUsers();
 
         if (regNameText.equals("") || regEmailText.equals("") || regPasswordText.equals("") || regPasswordConfirmText.equals("")) {
             resultOutput.setText(getResources().getString(R.string.MissingDetails));
         } else if (!regPasswordText.equals(regPasswordConfirmText)){
             resultOutput.setText(getResources().getString(R.string.PasswordMismatch));
         } else {
-            result = storedUsers.checkEmail(regEmailText);
-
-            if (result.equals("true")) {
+            if (storedUsers.checkEmailExists(regEmailText)) {
                 resultOutput.setText(getResources().getString(R.string.UserAlreadyExists));
             } else {
-                StoredUser newUser = new StoredUser(regEmailText, regPasswordText, regNameText, "customer");
+                User newUser = new User(regEmailText, regPasswordText, regNameText, "customer");
                 storedUsers.addNewUser(newUser);
                 saveStoredUsers(storedUsers);
                 finish();
@@ -59,64 +58,41 @@ public class RegisterUser extends AppCompatActivity {
         }
     }
 
-    public UserList getStoredUsers() {
+    /**
+     * Fetches the text file with store users from storage and loads it into a UserList object
+     * @return The filled UserList object
+     */
+    public StoredUserList getStoredUsers() {
 
-        File file = null;
         FileInputStream fis = null;
         InputStream is = null;
-        UserList storedUsers = new UserList();
+        StoredUserList storedUsers = new StoredUserList();
 
         try {
             fis = openFileInput("users.txt");
             storedUsers.openStoredUsersList(fis);
-
+            fis.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            // File not found in local storage so use the default one in assets
             try {
                 is = getAssets().open("users.txt");
                 storedUsers.openStoredUsersList(is);
+                is.close();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
-            } finally {
-                if (is != null) {
-                    try {
-                        is.close();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }
-            }
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
         return storedUsers;
     }
 
-    public void saveStoredUsers(UserList storedUsers){
+    /**
+     * Stores the user list in a text file in local storage
+     * @param storedUsers The filled UserList object
+     */
+    public void saveStoredUsers(StoredUserList storedUsers){
 
-        FileOutputStream fos = null;
-
-        try {
-            fos = openFileOutput("users.txt", MODE_PRIVATE);
-            storedUsers.saveStoredUsersList(fos);
-            Toast.makeText(this, R.string.NewUserCreated, Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
+        File file = new File(getFilesDir(), "users.txt");
+        storedUsers.saveStoredUsersList(file);
+        Toast.makeText(this, R.string.NewUserCreated, Toast.LENGTH_LONG).show();
     }
 }

@@ -16,4 +16,8 @@
     <string name="UserAlreadyExists">An account for this email\nis already registered</string>
     <string name="NewUserCreated">New User Created</string>
     <string name="LoginSuccess">Login Successful</string>
+    <string name="Welcome">Welcome</string>
+    <string name="BookTable">Book A Table</string>
+    <string name="ViewBookings">View Bookings</string>
+    <string name="ViewTables">View Tables</string>
 </resources>

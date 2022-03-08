@@ -26,8 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * The activity when the user clicks on the register link
+     * @param view The view
+     */
     public void onClickRegisterAccount(View view) {
 
+        TextView resultOutput = findViewById(R.id.loginResult);
+        resultOutput.setText("");
         Intent intent = new Intent(this, RegisterUser.class);
         startActivity(intent);
 
@@ -39,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickLogIn(View view) {
 
-        UserList storedUsers = getStoredUsers();
+        StoredUserList storedUsers = getStoredUsers();
 
         EditText loginEmailView = findViewById(R.id.LogInEmailAddress);
         String  loginEmailText = loginEmailView.getText().toString();
@@ -47,60 +53,51 @@ public class MainActivity extends AppCompatActivity {
         EditText loginPasswordView = findViewById(R.id.LogInPassword);
         String loginPasswordText = loginPasswordView.getText().toString();
 
-        String[] result;
-        result = storedUsers.checkLoginDetails(loginEmailText, loginPasswordText);
+        User currentUser = storedUsers.checkLoginDetails(loginEmailText, loginPasswordText);
 
         TextView resultOutput = findViewById(R.id.loginResult);
 
-        User sessionUser;
-
-        if (result[0].equals("true")){
-            StoredUser currentStoredUser = storedUsers.getStoredUserAt(Integer.valueOf(result[1]));
-            if (currentStoredUser.getAccessLevel().equals("customer")) {
-                sessionUser = new Customer(currentStoredUser.getEmail(), currentStoredUser.getUName(), currentStoredUser.getPassword());
-            } else if (currentStoredUser.getAccessLevel().equals("staff")) {
-                sessionUser = new Staff(currentStoredUser.getEmail(), currentStoredUser.getUName(), currentStoredUser.getPassword());
-            }
+        if (currentUser != null){
             Toast.makeText(this, R.string.LoginSuccess, Toast.LENGTH_LONG).show();
+
+            // Save a file with current user details so all activities can access without having to pass with intents
+            File file = new File(getFilesDir(), "current_user.txt");
+            currentUser.saveUserToFile(file);
+
+            if (currentUser.getAccessLevel().equals("customer")) {
+                Intent intent = new Intent(this, CustomerHome.class);
+                startActivity(intent);
+            } else if (currentUser.getAccessLevel().equals("staff")) {
+                Intent intent = new Intent(this, StaffHome.class);
+                startActivity(intent);
+            }
         } else {
             resultOutput.setText(getResources().getString(R.string.LoginFailed));
         }
     }
 
-    public UserList getStoredUsers() {
+    /**
+     * Fetches the text file with store users from storage and loads it into a UserList object
+     * @return The filled UserList object
+     */
+    public StoredUserList getStoredUsers() {
 
-        File file = null;
         FileInputStream fis = null;
         InputStream is = null;
-        UserList storedUsers = new UserList();
+        StoredUserList storedUsers = new StoredUserList();
 
         try {
             fis = openFileInput("users.txt");
             storedUsers.openStoredUsersList(fis);
-
+            fis.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            // File not found in local storage so use the default one in assets
             try {
                 is = getAssets().open("users.txt");
                 storedUsers.openStoredUsersList(is);
+                is.close();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
-            } finally {
-                if (is != null) {
-                    try {
-                        is.close();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }
-            }
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
         return storedUsers;

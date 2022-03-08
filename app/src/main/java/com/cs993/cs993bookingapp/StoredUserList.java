@@ -1,47 +1,46 @@
 package com.cs993.cs993bookingapp;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
-public class UserList {
+public class StoredUserList {
 
-    ArrayList<StoredUser> storedUsersList;
+    ArrayList<User> usersList;
 
-    public UserList() {
+    public StoredUserList() {
 
-        storedUsersList = new ArrayList<>();
+        usersList = new ArrayList<>();
 
     }
 
-    public StoredUser getStoredUserAt(int index){
-        return storedUsersList.get(index);
+    // Getters and Setters
+
+    public User getStoredUserAt(int index){
+        return usersList.get(index);
     }
 
-    public void updateList(StoredUser user) {
-        storedUsersList.add(user);
+    public void updateList(User user) {
+        usersList.add(user);
     }
 
-    public ArrayList<StoredUser> getStoredUsersList() {
-        return storedUsersList;
+    public ArrayList<User> getStoredUsersList() {
+        return usersList;
     }
+
+    // Methods
 
     /**
      * Fills the user list with user data from a text file
      * @param is The text file data
      */
     public void openStoredUsersList(InputStream is) {
-
 
         try {
 
@@ -63,36 +62,33 @@ public class UserList {
                 }
             }
         }
-
     }
 
-    public void saveStoredUsersList(FileOutputStream fos) {
+    /**
+     * Saves the current users in the list to file
+     * @param file The text file
+     */
+    public void saveStoredUsersList(File file) {
 
         String content = "";
+        FileOutputStream fos = null;
 
-        for (StoredUser user : storedUsersList) {
+        for (User user : usersList) {
             content += user.getEmail() + "/";
             content += user.getPassword() + "/";
             content += user.getUName() + "/";
             content += user.getAccessLevel();
-            if (storedUsersList.indexOf(user) < storedUsersList.size() - 1 ) {
+            if (usersList.indexOf(user) < usersList.size() - 1 ) {
                 content += "\n";
             }
         }
         try {
+            fos = new FileOutputStream(file);
             fos.write(content.getBytes());
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fos != null){
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
     }
 
     /**
@@ -103,12 +99,16 @@ public class UserList {
 
         String[] tokens = line.split("/");
 
-        StoredUser nextUser = new StoredUser(tokens[0], tokens[1], tokens[2], tokens[3]);
-        storedUsersList.add(nextUser);
+        User nextUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]);
+        usersList.add(nextUser);
     }
 
-    public void addNewUser(StoredUser newUser) {
-        storedUsersList.add(newUser);
+    /**
+     * Takes a storedUser object created from registering a new user and adds it to the list
+     * @param newUser the new storedUser object
+     */
+    public void addNewUser(User newUser) {
+        usersList.add(newUser);
     }
 
     /**
@@ -117,32 +117,33 @@ public class UserList {
      * @param password The users entered Password
      * @return "true" if details are correct with the index of the user in the list, "false" otherwise
      */
-    public String[] checkLoginDetails(String email, String password){
+    public User checkLoginDetails(String email, String password){
 
-        String[] result = {"false", ""};
+        User currentUser = null;
 
-        for (StoredUser user : storedUsersList) {
+        for (User user : usersList) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                result[0] = ("true");
-                result[1] = String.valueOf(storedUsersList.indexOf(user));
+                currentUser = user;
                 break;
             }
         }
 
-        return result;
+        return currentUser;
     }
 
-    public String checkEmail(String email){
+    /**
+     * Compares the entered email with the stored users list
+     * @param email The users entered email
+     * @return "true" if details are found within the list
+     */
+    public boolean checkEmailExists(String email){
 
-        String result = "false";
-
-        for (StoredUser user : storedUsersList) {
+        for (User user : usersList) {
             if (user.getEmail().equals(email)) {
-                result = ("true");
-                break;
+                return true;
             }
         }
 
-        return result;
+        return false;
     }
 }

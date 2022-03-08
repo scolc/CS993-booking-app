@@ -1,2 +1,2 @@
-admin/pass/name/staff
-email/password/name/customer
+staff/pass/name/staff
+customer/pass/name/customer
