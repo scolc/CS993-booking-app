@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS993BookingApp">
         <activity
+            android:name=".ViewSelectedBooking"
+            android:exported="false" />
+        <activity
+            android:name=".ViewBookings"
+            android:exported="false" />
+        <activity
+            android:name=".BookingCreated"
+            android:exported="false" />
+        <activity
+            android:name=".BookTable"
+            android:exported="false" />
+        <activity
             android:name=".StaffHome"
             android:exported="false" />
         <activity

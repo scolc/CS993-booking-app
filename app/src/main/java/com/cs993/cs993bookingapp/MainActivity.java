@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickRegisterAccount(View view) {
 
-        TextView resultOutput = findViewById(R.id.loginResult);
+        TextView resultOutput = findViewById(R.id.LoginResult);
         resultOutput.setText("");
         Intent intent = new Intent(this, RegisterUser.class);
         startActivity(intent);
@@ -55,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
 
         User currentUser = storedUsers.checkLoginDetails(loginEmailText, loginPasswordText);
 
-        TextView resultOutput = findViewById(R.id.loginResult);
+        TextView resultOutput = findViewById(R.id.LoginResult);
 
         if (currentUser != null){
-            Toast.makeText(this, R.string.LoginSuccess, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.LoginSuccess, Toast.LENGTH_SHORT).show();
 
             // Save a file with current user details so all activities can access without having to pass with intents
             File file = new File(getFilesDir(), "current_user.txt");
-            currentUser.saveUserToFile(file);
+            currentUser.saveCurrentUserToFile(file);
 
             if (currentUser.getAccessLevel().equals("customer")) {
                 Intent intent = new Intent(this, CustomerHome.class);

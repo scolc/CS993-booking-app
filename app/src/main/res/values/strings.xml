@@ -20,4 +20,20 @@
     <string name="BookTable">Book A Table</string>
     <string name="ViewBookings">View Bookings</string>
     <string name="ViewTables">View Tables</string>
+    <string name="GuestNumber">Number of Guests</string>
+    <string name="TimeReservation">Time of Reservation</string>
+    <string name="DateReservation">Date of Reservation</string>
+    <string name="DatePicker">Date</string>
+    <string name="Submit">Submit</string>
+    <string name="PickDate">Please Pick A Date</string>
+    <string name="BookingCreated">Booking Created</string>
+    <string name="BookingCreatedMessage">Your Booking Has Been Created.\n\nA Member Of Staff Will Confirm The Booking Soon.\n\nPlease Check Your Booking Details For An Update.</string>
+    <string name="Home">Home</string>
+    <string name="YourBookings">Your Bookings</string>
+    <string name="YourBookingsHeading">Your Bookings Will Appear Below.\nSelect A Booking To View Details Or Delete.</string>
+    <string name="YourBookingDetails">Your Booking Details</string>
+    <string name="Back">Back</string>
+    <string name="Delete">Delete</string>
+    <string name="DeleteSuccess">Booking Deleted</string>
+    <string name="LogOut">Log Out</string>
 </resources>

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class StoredUserList {
 
-    ArrayList<User> usersList;
+    private ArrayList<User> usersList;
 
     public StoredUserList() {
 
@@ -50,17 +50,9 @@ public class StoredUserList {
             while ((line = reader.readLine()) != null) {
                 addUser(line);
             }
-
+            is.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
