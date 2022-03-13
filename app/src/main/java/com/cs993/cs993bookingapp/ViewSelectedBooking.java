@@ -9,13 +9,29 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class CustomerHome extends AppCompatActivity {
+import java.io.File;
+
+public class ViewSelectedBooking extends AppCompatActivity {
+
+    private Booking booking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_home);
+        setContentView(R.layout.activity_view_selected_booking);
+
+        booking = getIntent().getParcelableExtra("booking");
+        TextView details = findViewById(R.id.YourBookingDetails);
+
+        String detailList = "Date: " + booking.getDate() + "\n";
+        detailList += "Time: " + booking.getTime() + "\n";
+        detailList += "Guests: " + booking.getGuestNum() + "\n";
+        detailList += "Status: " + booking.getStatus();
+
+        details.setText(detailList);
     }
 
     @Override
@@ -41,15 +57,25 @@ public class CustomerHome extends AppCompatActivity {
         }
     }
 
-    public void onClickBookTable(View view) {
+    public void onClickBack(View view) {
 
-        Intent intent = new Intent(this, BookTable.class);
-        startActivity(intent);
+        finish();
     }
 
-    public void onClickViewBookings(View view) {
+    public void onClickDelete(View view) {
+
+        File bookingFile = new File(getFilesDir(), "bookings.txt");
+        BookingList bookingList = new BookingList(bookingFile);
+
+        boolean result = bookingList.removeBooking(booking);
+        bookingList.saveBookings(bookingFile);
+
+        if (result) {
+            Toast.makeText(this, R.string.DeleteSuccess, Toast.LENGTH_SHORT).show();
+        }
 
         Intent intent = new Intent(this, ViewBookings.class);
         startActivity(intent);
+
     }
 }

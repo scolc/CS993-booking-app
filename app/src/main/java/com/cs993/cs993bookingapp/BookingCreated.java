@@ -10,12 +10,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-public class CustomerHome extends AppCompatActivity {
+public class BookingCreated extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_home);
+        setContentView(R.layout.activity_booking_created);
     }
 
     @Override
@@ -41,15 +41,9 @@ public class CustomerHome extends AppCompatActivity {
         }
     }
 
-    public void onClickBookTable(View view) {
+    public void onClickHome(View view) {
 
-        Intent intent = new Intent(this, BookTable.class);
-        startActivity(intent);
-    }
-
-    public void onClickViewBookings(View view) {
-
-        Intent intent = new Intent(this, ViewBookings.class);
+        Intent intent = new Intent(this, CustomerHome.class);
         startActivity(intent);
     }
 }

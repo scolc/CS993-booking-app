@@ -3,9 +3,13 @@ package com.cs993.cs993bookingapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class User {
 
@@ -17,6 +21,10 @@ public class User {
         this.password = password;
         this.uName = uName;
         this.accessLevel = accessLevel;
+    }
+
+    public User(File file){
+        getCurrentUserFromFile(file);
     }
 
     // Getters and Setters
@@ -55,7 +63,7 @@ public class User {
 
     // Methods
 
-    public void saveUserToFile(File file) {
+    public void saveCurrentUserToFile(File file) {
 
         String content = "";
         FileOutputStream fos = null;
@@ -74,4 +82,23 @@ public class User {
         }
     }
 
+    public void getCurrentUserFromFile(File file) {
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+
+            String line = reader.readLine();
+            String[] tokens = line.split("/");
+            email = tokens[0];
+            password = tokens[1];
+            uName = tokens[2];
+            accessLevel = tokens[3];
+
+            fis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
