@@ -18,6 +18,8 @@ public class BookingCreated extends AppCompatActivity {
         setContentView(R.layout.activity_booking_created);
     }
 
+    // Menu items
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -41,6 +43,10 @@ public class BookingCreated extends AppCompatActivity {
         }
     }
 
+    /**
+     * The activity when the user clicks on the Home button
+     * @param view The view
+     */
     public void onClickHome(View view) {
 
         Intent intent = new Intent(this, CustomerHome.class);

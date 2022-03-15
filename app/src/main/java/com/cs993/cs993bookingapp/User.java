@@ -63,6 +63,10 @@ public class User {
 
     // Methods
 
+    /**
+     * Creates a file using the current logged in users information
+     * @param file The file to save to
+     */
     public void saveCurrentUserToFile(File file) {
 
         String content = "";
@@ -82,6 +86,10 @@ public class User {
         }
     }
 
+    /**
+     * Reads the current customer information from file
+     * @param file The file to read from
+     */
     public void getCurrentUserFromFile(File file) {
         try {
             FileInputStream fis = new FileInputStream(file);

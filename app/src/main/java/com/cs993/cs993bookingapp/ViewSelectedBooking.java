@@ -34,6 +34,8 @@ public class ViewSelectedBooking extends AppCompatActivity {
         details.setText(detailList);
     }
 
+    // Menu items
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -57,11 +59,20 @@ public class ViewSelectedBooking extends AppCompatActivity {
         }
     }
 
+    /**
+     * The activity when the user clicks on the Back button
+     * @param view The view
+     */
     public void onClickBack(View view) {
 
         finish();
     }
 
+    /**
+     * The activity when the user clicks on the Delete button.
+     * Removes the currently viewed booking from the list of bookings.
+     * @param view The view
+     */
     public void onClickDelete(View view) {
 
         File bookingFile = new File(getFilesDir(), "bookings.txt");

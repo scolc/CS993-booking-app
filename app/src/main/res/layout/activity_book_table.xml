@@ -31,17 +31,17 @@
 
     <Spinner
         android:id="@+id/GuestNumberChoice"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginLeft="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:backgroundTintMode="add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GuestNumber"
+        android:padding="5dp"
+        android:background="@drawable/bg_spinner"
         android:entries="@array/GuestNumberChoice"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/GuestNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/DateReservation"
@@ -92,7 +92,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
-        android:backgroundTintMode="add"
+        android:padding="5dp"
+        android:background="@drawable/bg_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TimeReservation"
@@ -103,7 +104,7 @@
         android:id="@+id/Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:text="@string/Submit"
         android:onClick="onClickSubmit"
         app:layout_constraintEnd_toEndOf="parent"

@@ -15,10 +15,10 @@ public class Booking implements Parcelable {
         this.time = time;
         this.guestNum = guestNum;
         this.status = status;
-
     }
 
     // Parcelable Methods
+
     protected Booking(Parcel in) {
         email = in.readString();
         uName = in.readString();
@@ -107,6 +107,10 @@ public class Booking implements Parcelable {
 
     // Methods
 
+    /**
+     * Overrides the toString to format a string for display on screen
+     * @return The formatted String
+     */
     @Override
     public String toString(){
         String result = "";
@@ -116,9 +120,14 @@ public class Booking implements Parcelable {
         return result;
     }
 
+    /**
+     * Overrides the equals reference equality with object equality
+     * @param aBooking The object to compare to this Booking object
+     * @return True if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object aBooking) {
-        // Override the reference equality (two different references pointing to the same object) with object equality (two different objects that are equivalent)
+
         Booking booking = (Booking) aBooking;
         return email.equals(booking.getEmail()) && date.equals(booking.getDate()) && time.equals(booking.getTime());
     }

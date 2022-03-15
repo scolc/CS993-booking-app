@@ -18,6 +18,8 @@ public class CustomerHome extends AppCompatActivity {
         setContentView(R.layout.activity_customer_home);
     }
 
+    // Menu items
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -41,12 +43,20 @@ public class CustomerHome extends AppCompatActivity {
         }
     }
 
+    /**
+     * The activity when the user clicks on Book Table
+     * @param view The view
+     */
     public void onClickBookTable(View view) {
 
         Intent intent = new Intent(this, BookTable.class);
         startActivity(intent);
     }
 
+    /**
+     * The activity when the user clicks on View Bookings
+     * @param view The view
+     */
     public void onClickViewBookings(View view) {
 
         Intent intent = new Intent(this, ViewBookings.class);
