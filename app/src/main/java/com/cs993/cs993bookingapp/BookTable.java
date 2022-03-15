@@ -31,6 +31,8 @@ public class BookTable extends AppCompatActivity implements DatePickerDialog.OnD
         setContentView(R.layout.activity_book_table);
     }
 
+    // Menu items
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -54,6 +56,10 @@ public class BookTable extends AppCompatActivity implements DatePickerDialog.OnD
         }
     }
 
+    /**
+     * The activity when the user clicks on the Date button
+     * @param view The view
+     */
     public void onClickDatePicker(View view) {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -65,6 +71,13 @@ public class BookTable extends AppCompatActivity implements DatePickerDialog.OnD
         datePickerDialog.show();
     }
 
+    /**
+     * Formats a String based on the date the user selected and displays it
+     * @param datePicker The datePicker object
+     * @param year The year integer
+     * @param month The month integer starting from 0
+     * @param dayOfMonth The day integer
+     */
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         String date = dayOfMonth + "/" + (month + 1) + "/" + year;
@@ -72,6 +85,10 @@ public class BookTable extends AppCompatActivity implements DatePickerDialog.OnD
         dateChoice.setText(date);
     }
 
+    /**
+     * The activity when the user clicks on the Submit button
+     * @param view The view
+     */
     public void onClickSubmit(View view) {
 
         Spinner guestNumChoice = findViewById(R.id.GuestNumberChoice);
@@ -89,7 +106,7 @@ public class BookTable extends AppCompatActivity implements DatePickerDialog.OnD
             resultOutput.setText(getResources().getString(R.string.MissingDetails));
         } else {
             File userFile = new File(getFilesDir(), "current_user.txt");
-            User currentUser = new User(userFile);
+            Customer currentUser = new Customer(userFile);
             Booking newBooking = new Booking(currentUser.getEmail(), currentUser.getUName(), datePicked, timePicked, guestNum, "Not Confirmed");
 
             File bookingFile = new File(getFilesDir(), "bookings.txt");
