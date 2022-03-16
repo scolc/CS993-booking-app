@@ -10,6 +10,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS993BookingApp">
         <activity
+            android:name=".StaffCreateBooking"
+            android:exported="false" />
+        <activity
+            android:name=".StaffAssignBooking"
+            android:exported="false" />
+        <activity
+            android:name=".StaffViewSelectedTableBooking"
+            android:exported="false" />
+        <activity
+            android:name=".StaffViewSelectedTable"
+            android:exported="false" />
+        <activity
+            android:name=".StaffViewTables"
+            android:exported="false" />
+        <activity
+            android:name=".StaffUpdateBooking"
+            android:exported="false" />
+        <activity
+            android:name=".StaffViewSelectedBooking"
+            android:exported="false" />
+        <activity
+            android:name=".StaffViewBookings"
+            android:exported="false" />
+        <activity
             android:name=".ViewSelectedBooking"
             android:exported="false" />
         <activity

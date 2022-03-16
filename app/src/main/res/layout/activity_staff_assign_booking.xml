@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewSelectedBooking">
+    tools:context=".StaffAssignBooking">
 
     <TextView
-        android:id="@+id/BookingDetails"
+        android:id="@+id/StaffViewSelectedTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/YourBookingDetails"
         android:textSize="34sp"
         android:textStyle="bold"
         android:layout_marginTop="75dp"
@@ -20,38 +19,49 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/YourBookingDetails"
-        android:layout_width="0dp"
+        android:id="@+id/UnassignedBookings"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:text="@string/UnassignedBookings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StaffViewSelectedTable" />
+
+    <ListView
+        android:id="@+id/Lv_UnassignedBookings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:padding="9dp"
         android:background="@drawable/borderbox"
-        android:padding="50dp"
-        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/Back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BookingDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/UnassignedBookings"
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/blue"/>
 
     <Button
         android:id="@+id/Back"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="@string/Back"
-        android:onClick="onClickBack"
         android:layout_marginBottom="50dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/YourBookingDetails" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onClickBack" />
 
     <Button
-        android:id="@+id/Delete"
+        android:id="@+id/ConfirmSelectedBooking"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/Delete"
-        android:onClick="onClickDelete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/YourBookingDetails" />
+        android:enabled="false"
+        android:onClick="onClickConfirmSelectedBooking"
+        android:text="@string/Confirm"
+        android:layout_marginRight="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Back" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

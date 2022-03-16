@@ -90,4 +90,19 @@ public class BookingListTest {
         assertEquals(bookingListUser2, bookingList.getBookingsForUser(user2));
         assertEquals(bookingListUser3, bookingList.getBookingsForUser(user3));
     }
+
+    /**
+     * Tests updating a booking status
+     */
+    @Test
+    public void updateBooking() {
+        assertTrue(bookingList.updateBooking(booking1, "Confirmed"));
+        assertEquals("Confirmed", booking1.getStatus());
+        assertTrue(bookingList.updateBooking(booking1, "Denied"));
+        assertEquals("Denied", booking1.getStatus());
+        assertTrue(bookingList.updateBooking(booking2, "Confirmed"));
+        assertEquals("Confirmed", booking2.getStatus());
+        assertTrue(bookingList.updateBooking(booking2, "Denied"));
+        assertEquals("Denied", booking2.getStatus());
+    }
 }
