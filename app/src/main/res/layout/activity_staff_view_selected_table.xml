@@ -4,44 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookTable">
+    tools:context=".StaffViewSelectedTable">
 
     <TextView
-        android:id="@+id/BookTable"
+        android:id="@+id/StaffViewSelectedTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/BookTable"
         android:textSize="34sp"
         android:textStyle="bold"
         android:layout_marginTop="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/GuestNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/GuestNumber"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BookTable" />
-
-    <Spinner
-        android:id="@+id/GuestNumberChoice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:padding="5dp"
-        android:background="@drawable/bg_spinner"
-        android:entries="@array/GuestNumberChoice"
-        app:layout_constraintTop_toBottomOf="@+id/GuestNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/DateReservation"
@@ -51,7 +26,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/DateReservation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GuestNumberChoice" />
+        app:layout_constraintTop_toBottomOf="@+id/StaffViewSelectedTable" />
 
 
     <Button
@@ -76,51 +51,57 @@
         app:layout_constraintTop_toTopOf="@+id/DatePicker" />
 
     <TextView
-        android:id="@+id/TimeReservation"
+        android:id="@+id/StaffTimeReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/TimeReservation"
         android:layout_marginTop="20dp"
         android:layout_marginStart="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DatePicker" />
 
-    <Spinner
-        android:id="@+id/TimeReservationChoice"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
-        android:padding="5dp"
-        android:background="@drawable/bg_spinner"
+    <ListView
+        android:id="@+id/Lv_StaffTableBookings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/borderbox"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/Back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TimeReservation"
-        android:entries="@array/TimeReservationSlots"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/StaffTimeReservation" />
 
     <Button
-        android:id="@+id/Submit"
+        android:id="@+id/Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:text="@string/Submit"
-        android:onClick="onClickSubmit"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/Back"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TimeReservationChoice" />
+        android:onClick="onClickBack" />
 
-    <TextView
-        android:id="@+id/SubmitResult"
+    <Button
+        android:id="@+id/Assign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/red"
+        android:text="@string/Assign"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Back"
+        app:layout_constraintEnd_toStartOf="@+id/Create"
+        app:layout_constraintStart_toEndOf="@+id/Back"
+        android:onClick="onClickAssign"/>
+
+    <Button
+        android:id="@+id/Create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Create"
+        android:layout_marginRight="50dp"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Assign"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/Submit" />
+        android:onClick="onClickCreate"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

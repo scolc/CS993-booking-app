@@ -9,13 +9,27 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-public class StaffHome extends AppCompatActivity {
+public class StaffViewSelectedTableBooking extends AppCompatActivity {
+
+    private Booking booking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_staff_home);
+        setContentView(R.layout.activity_staff_view_selected_table_booking);
+
+        booking = getIntent().getParcelableExtra("booking");
+        TextView details = findViewById(R.id.StaffBookingDetails);
+
+        String detailList = "Name: " + booking.getUName() + "\n";
+        detailList += "Date: " + booking.getDate() + "\n";
+        detailList += "Time: " + booking.getTime() + "\n";
+        detailList += "Guests: " + booking.getGuestNum() + "\n";
+        detailList += "Status: " + booking.getStatus();
+
+        details.setText(detailList);
     }
 
     // Menu items
@@ -43,15 +57,12 @@ public class StaffHome extends AppCompatActivity {
         }
     }
 
-    public void onClickViewBookings(View view) {
+    /**
+     * The activity when the user clicks on the Back button
+     * @param view The view
+     */
+    public void onClickBack(View view) {
 
-        Intent intent = new Intent(this, StaffViewBookings.class);
-        startActivity(intent);
-    }
-
-    public void onClickViewTables(View view) {
-
-        Intent intent = new Intent(this, StaffViewTables.class);
-        startActivity(intent);
+        finish();
     }
 }

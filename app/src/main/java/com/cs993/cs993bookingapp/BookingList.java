@@ -22,6 +22,11 @@ public class BookingList {
         bookings = new ArrayList<>();
     }
 
+    // Getters
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
     /**
      * Reads and stores all the booking information from file
      * @param file The file the booking information is stored in
@@ -68,10 +73,20 @@ public class BookingList {
      * @param booking The booking to remove from the list
      * @return True if the booking was removed successfully, false otherwise
      */
-    public Boolean removeBooking(Booking booking){
+    public boolean removeBooking(Booking booking){
         for (Booking entry : bookings) {
             if (entry.equals(booking)) {
                 bookings.remove(entry);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean updateBooking(Booking booking, String status){
+        for (Booking entry : bookings) {
+            if (entry.equals(booking)) {
+                entry.setStatus(status);
                 return true;
             }
         }

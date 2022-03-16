@@ -36,4 +36,19 @@
     <string name="Delete">Delete</string>
     <string name="DeleteSuccess">Booking Deleted</string>
     <string name="LogOut">Log Out</string>
+    <string name="StaffBookings">Bookings</string>
+    <string name="StaffBookingsHeading">Bookings Will Appear Below.\nSelect A Booking To View Details.</string>
+    <string name="StaffBookingDetails">Booking Details</string>
+    <string name="Update">Update</string>
+    <string name="Confirm">Confirm</string>
+    <string name="Deny">Deny</string>
+    <string name="ConfirmBooking">Confirm Or Deny Booking?</string>
+    <string name="UpdateSuccess">Update Successful</string>
+    <string name="StaffViewTables">Tables</string>
+    <string name="SelectReservedTime">Select A Reserved Time To View Details</string>
+    <string name="Assign">Assign\nBooking</string>
+    <string name="Create">Create\nBooking</string>
+    <string name="UnassignedBookings">Bookings That Can Be Assigned To This Table</string>
+    <string name="BookingAssigned">Booking Assigned Successfully</string>
+    <string name="TimeReservationAvailable">Select An Available Time</string>
 </resources>

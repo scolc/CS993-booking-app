@@ -1,2 +1,2 @@
-staff/pass/name/staff
-customer/pass/name/customer
+staff/pass/staffname/staff
+customer/pass/custname/customer

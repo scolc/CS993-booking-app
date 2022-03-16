@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookingCreated">
+    tools:context=".StaffViewSelectedTableBooking">
 
     <TextView
-        android:id="@+id/BookingCreated"
+        android:id="@+id/BookingDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/BookingCreated"
+        android:text="@string/StaffBookingDetails"
         android:textSize="34sp"
         android:textStyle="bold"
         android:layout_marginTop="75dp"
@@ -20,28 +20,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/BookingCreatedMessage"
+        android:id="@+id/StaffBookingDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:text="@string/BookingCreatedMessage"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="50dp"
-        android:padding="60dp"
+        android:background="@drawable/borderbox"
+        android:padding="50dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BookingCreated" />
+        app:layout_constraintTop_toBottomOf="@+id/BookingDetails" />
 
     <Button
-        android:id="@+id/Home"
-        android:layout_width="wrap_content"
+        android:id="@+id/Back"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:onClick="onClickHome"
-        android:text="@string/Home"
+        android:onClick="onClickBack"
+        android:text="@string/Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

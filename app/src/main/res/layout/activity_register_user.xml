@@ -42,7 +42,8 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterMessage"
+        android:autofillHints="name" />
 
     <EditText
         android:id="@+id/RegisterEmail"
@@ -56,7 +57,8 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterName" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterName"
+        android:autofillHints="emailAddress" />
 
     <EditText
         android:id="@+id/RegisterPassword"
@@ -70,7 +72,8 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterEmail"
+        android:autofillHints="password" />
 
     <EditText
         android:id="@+id/RegisterPasswordConfirm"
@@ -84,7 +87,8 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterPassword"
+        android:autofillHints="password" />
 
     <Button
         android:id="@+id/RegisterSignUp"

@@ -14,19 +14,20 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class ViewSelectedBooking extends AppCompatActivity {
+public class StaffUpdateBooking extends AppCompatActivity {
 
     private Booking booking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_selected_booking);
+        setContentView(R.layout.activity_staff_update_booking);
 
         booking = getIntent().getParcelableExtra("booking");
-        TextView details = findViewById(R.id.YourBookingDetails);
+        TextView details = findViewById(R.id.StaffBookingDetails);
 
-        String detailList = "Date: " + booking.getDate() + "\n";
+        String detailList = "Name: " + booking.getUName() + "\n";
+        detailList += "Date: " + booking.getDate() + "\n";
         detailList += "Time: " + booking.getTime() + "\n";
         detailList += "Guests: " + booking.getGuestNum() + "\n";
         detailList += "Status: " + booking.getStatus();
@@ -47,7 +48,7 @@ public class ViewSelectedBooking extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Home:
-                Intent intent1 = new Intent(this, CustomerHome.class);
+                Intent intent1 = new Intent(this, StaffHome.class);
                 startActivity(intent1);
                 return true;
             case R.id.LogOut:
@@ -65,37 +66,47 @@ public class ViewSelectedBooking extends AppCompatActivity {
      */
     public void onClickBack(View view) {
 
-        finish();
+        Intent intent = new Intent(this, StaffViewSelectedBooking.class);
+        intent.putExtra("booking", booking);
+        startActivity(intent);
     }
 
     /**
-     * The activity when the user clicks on the Delete button.
-     * Removes the currently viewed booking from the list of bookings.
+     * The activity when the user clicks on the Confirm button
      * @param view The view
      */
-    public void onClickDelete(View view) {
+    public void onClickConfirm(View view) {
 
+        updateBooking("Confirmed");
+    }
+
+    /**
+     * The activity when the user clicks on the Deny button
+     * @param view The view
+     */
+    public void onClickDeny(View view) {
+
+        updateBooking("Denied");
+    }
+
+    /**
+     * Updates the status of the booking based on which button was clicked
+     * @param status The String to update the booking status with
+     */
+    public void updateBooking(String status){
         File bookingFile = new File(getFilesDir(), "bookings.txt");
         BookingList bookingList = new BookingList(bookingFile);
 
-        if (booking.getStatus().contains("Table")) {
-            String tableNum = booking.getStatus().replace("Table ", "");
-
-            File file = new File(getFilesDir(), "table" + tableNum + "_bookings.txt");
-            Table table = new Table(tableNum, file);
-            table.getTableBookingList().removeBooking(booking);
-            table.getTableBookingList().saveBookings(file);
-        }
-
-        boolean result = bookingList.removeBooking(booking);
+        boolean result = bookingList.updateBooking(booking, status);
         bookingList.saveBookings(bookingFile);
+        booking.setStatus(status);
 
         if (result) {
-            Toast.makeText(this, R.string.DeleteSuccess, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.UpdateSuccess, Toast.LENGTH_SHORT).show();
         }
 
-        Intent intent = new Intent(this, ViewBookings.class);
+        Intent intent = new Intent(this, StaffViewSelectedBooking.class);
+        intent.putExtra("booking", booking);
         startActivity(intent);
-
     }
 }

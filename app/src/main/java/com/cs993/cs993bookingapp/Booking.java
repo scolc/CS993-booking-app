@@ -129,6 +129,6 @@ public class Booking implements Parcelable {
     public boolean equals(Object aBooking) {
 
         Booking booking = (Booking) aBooking;
-        return email.equals(booking.getEmail()) && date.equals(booking.getDate()) && time.equals(booking.getTime());
+        return email.equals(booking.getEmail()) && date.equals(booking.getDate()) && time.equals(booking.getTime()) && status.equals(booking.getStatus());
     }
 }
