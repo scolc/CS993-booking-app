@@ -75,12 +75,11 @@
         android:id="@+id/Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Back"
         android:layout_marginBottom="50dp"
-        android:layout_marginStart="50dp"
+        android:onClick="onClickBack"
+        android:text="@string/Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="onClickBack" />
+        app:layout_constraintStart_toStartOf="@+id/Lv_StaffTableBookings" />
 
     <Button
         android:id="@+id/Assign"
@@ -97,11 +96,10 @@
         android:id="@+id/Create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClickCreate"
         android:text="@string/Create"
-        android:layout_marginRight="50dp"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@+id/Assign"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="onClickCreate"/>
+        app:layout_constraintEnd_toEndOf="@+id/Lv_StaffTableBookings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
