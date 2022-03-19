@@ -1,6 +1,6 @@
 Booking App Login
 
-2 accounts exist by default for evaluting the app.
+2 accounts exist by default for evaluating the app.
 
 Customer login
 email: customer
