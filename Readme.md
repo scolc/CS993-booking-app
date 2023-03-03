@@ -4,7 +4,7 @@ Repo for the prototype used in a course project.
 
 ## Contributers
 
-Steven Colclough - Main contributer.<br>
+Steven Colclough.<br>
 
 ## The Application
 
